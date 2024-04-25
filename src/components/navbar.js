@@ -1,30 +1,45 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../store/slices/language'; 
 
-export default function Navbar() {
+const Navbar = () => {
+  const { language, changeLanguage } = useLanguage();
+
+  const handleChangeLanguage = (e) => {
+    changeLanguage(e.target.value);
+  };
+
+  document.body.dir = language === 'ar' ? 'rtl' : 'ltr';
+
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <Link class="nav-link active" aria-current="page" to="/">Home</Link>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <Link class="nav-link active" aria-current="page" to="favouriteMovie">Favourite</Link>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">Navbar</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/Register">Register</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/favouriteMovie">Favourite</Link>
+              </li>
+            </ul>
+            <select value={language} onChange={handleChangeLanguage} className="form-select" style={{width:100}}>
+              <option value="en">English</option>
+              <option value="ar">Arabic</option>
+            </select>
+          </div>
+        </div>
+      </nav>
     </>
-  )
-}
+  );
+};
+
+export default Navbar;

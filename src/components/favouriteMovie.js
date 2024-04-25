@@ -41,14 +41,17 @@ export default function FavouriteMovie() {
 
                                                         <div className="card-body">
                                                             <h5 className="card-title">{movie.title}</h5>
-                                                            <p className="card-text">{movie.release_date}</p>
-                                                            <p className="card-text">{movie.overview}</p>
+                                                            <div className='d-flex justify-content-between'>
+                                                                <p className="card-text">{movie.release_date}</p>
+
+                                                                <FontAwesomeIcon
+                                                                    icon={faHeart}
+                                                                    onClick={() => toggleFavorite(movie)}
+                                                                    color={favorites.map(favorite => favorite.id).includes(movie.id) ? 'red' : 'gray'}
+                                                                />
+                                                            </div>                                                            <p className="card-text">{movie.overview}</p>
                                                             <p className="card-text">Rating: {movie.vote_average}</p>
-                                                            <FontAwesomeIcon
-                                                                icon={faHeart}
-                                                                onClick={() => toggleFavorite(movie)}
-                                                                color={favorites.map(favorite => favorite.id).includes(movie.id) ? 'red' : 'gray'}
-                                                            />
+
 
                                                         </div>
 
